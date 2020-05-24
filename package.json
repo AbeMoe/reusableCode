@@ -16,5 +16,9 @@
     "javascript"
   ],
   "author": "Abe",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0"
+  }
 }
