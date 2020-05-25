@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const roleWrapper = require(__dirname+'/good.js').roleWrapper;
+const {onlyAllow,dontAllow} = require(__dirname+'/good.js');
 const role = require(__dirname+'/bad.js');
 
 
