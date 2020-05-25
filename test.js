@@ -1,5 +1,5 @@
 const expect = require("chai").expect;
-const hasRole = require(__dirname+'/good.js').hasRole;
+const roleWrapper = require(__dirname+'/good.js').roleWrapper;
 const role = require(__dirname+'/bad.js');
 
 
@@ -32,19 +32,23 @@ describe("Check Authorization Level",function()
   
   describe("good wrapper example", function()//The real slim shady
   {
-    let user = {name:'brad',role:'admin'};
-    it('empty array',function()
+    let admin = {name:'brad',role:'admin'};
+    let wizard = {name:'brad',role:'wizard'};
+    let lizard = {name:'brad',role:'lizard'};
+    let onlyAdmins = onlyAllow(['admin']);
+    let noLizards = dontAllow(['lizard']);
+
+    it('only allow tests',function()
     {
-      expect(hasRole([],user)).to.equal(false);
+      expect(onlyAdmins(admin)).to.equal(true);
+      expect(onlyAdmins(lizard)).to.equal(false);
     })
 
-    it('array with admin in it',function()
+    it('Dont allow tests',function()
     {
-      expect(hasRole(['admin','lizard','wizard'],user)).to.equal(true);
-    })
-    it('array without admin in it',function()
-    {
-      expect(hasRole(['user','lizard','wizard'],user)).to.equal(false);
+      expect(noLizards(wizard)).to.equal(true);
+      expect(noLizards(lizard)).to.equal(false);
+
     })
   })
   
